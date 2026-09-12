@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PixelOS — WebOS 1</title>
 <style>
-:root{--accent:#7c5cff;--accent2:#25d0ff;--bg:#101322;--panel:rgba(25,29,50,.92);--text:#f7f8ff;--muted:#aeb6d3}
+:root{--accent:#7c5cff;--accent2:#cef036;--bg:#101322;--panel:rgba(25,29,50,.92);--text:#f7f8ff;--muted:#aeb6d3;--wallpaper:radial-gradient(circle at 20% 20%,rgba(124,92,255,.32),transparent 32%),radial-gradient(circle at 80% 70%,rgba(37,208,255,.2),transparent 30%),linear-gradient(135deg,#0a0d1b,#151a32 55%,#090c16)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#080a12;color:var(--text);overflow:hidden}
-#desktop{height:100vh;position:relative;background:radial-gradient(circle at 20% 20%,rgba(124,92,255,.32),transparent 32%),radial-gradient(circle at 80% 70%,rgba(37,208,255,.2),transparent 30%),linear-gradient(135deg,#0a0d1b,#151a32 55%,#090c16)}
+#desktop{height:100vh;position:relative;background:var(--wallpaper)}
 #desktop:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:45px 45px;opacity:.08;pointer-events:none}
 .desktop-title{position:absolute;left:34px;top:28px;z-index:1}.desktop-title h1{margin:0;font-size:42px;letter-spacing:-2px}.desktop-title p{margin:4px 0;color:var(--muted)}
 .icon-grid{position:absolute;left:28px;top:125px;display:grid;gap:14px;z-index:2}
@@ -61,7 +61,14 @@
       <p class="small">A PixelOS-only feature: customize the desktop.</p>
       <div class="theme-preview"></div>
       <label>Accent color</label><input type="color" id="accent" value="#7c5cff">
-      <div class="row"><button class="btn" id="randomTheme">Randomize</button><button class="btn secondary" id="resetTheme">Reset</button></div>
+<label>Wallpaper</label>
+<select id="wallpaper">
+<option value="default">Pixel Purple</option>
+<option value="blue">Ocean Blue</option>
+<option value="green">Neon Green</option>
+<option value="sunset">Sunset</option>
+</select>
+<div class="row"><button class="btn" id="randomTheme">Randomize</button><button class="btn secondary" id="resetTheme">Reset</button></div>
     </div>
   </section>
 
@@ -103,7 +110,22 @@ function setAccent(c){document.documentElement.style.setProperty('--accent',c);l
 setAccent(localStorage.getItem('pixelos-accent')||'#7c5cff');
 document.getElementById('accent').oninput=e=>setAccent(e.target.value);
 document.getElementById('randomTheme').onclick=()=>{const colors=['#7c5cff','#00b8ff','#ff4fa3','#20c997','#ff9f43','#feca57'];setAccent(colors[Math.floor(Math.random()*colors.length)]);toast('Theme changed')};
-document.getElementById('resetTheme').onclick=()=>{setAccent('#7c5cff');toast('Theme reset')};
+document.getElementById('resetTheme').onclick=()=>{setAccent('#7c5cff');toast('Theme reset')};const wallpapers={
+  default:'radial-gradient(circle at 20% 20%,rgba(124,92,255,.32),transparent 32%),radial-gradient(circle at 80% 70%,rgba(37,208,255,.2),transparent 30%),linear-gradient(135deg,#0a0d1b,#151a32 55%,#090c16)',
+  blue:'linear-gradient(135deg,#071e3d,#1261a0,#0b132b)',
+  green:'linear-gradient(135deg,#071a12,#0b5d3b,#06110d)',
+  sunset:'linear-gradient(135deg,#32113f,#9b3d5e,#f08a4b)'
+};
+
+function setWallpaper(name){
+  document.documentElement.style.setProperty('--wallpaper',wallpapers[name]);
+  localStorage.setItem('pixelos-wallpaper',name);
+}
+
+const wallpaper=document.getElementById('wallpaper');
+wallpaper.value=localStorage.getItem('pixelos-wallpaper')||'default';
+wallpaper.onchange=e=>setWallpaper(e.target.value);
+setWallpaper(wallpaper.value);
 function tick(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); }tick();setInterval(tick,1000);
 </script>
 </body>
