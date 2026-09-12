@@ -4,9 +4,8 @@ A beginner-friendly browser operating system made for the Hack Club Stardance We
 
 ## Requirements covered
 - Working webpage with multiple draggable windows
-- Original look and name (not a copy of the guide)
+- Original look and name 
 - No password
 - New feature: **Theme Lab**, which lets users change the accent color and randomize/reset the theme
 - Apps: Welcome, Notes, Calculator, Theme Lab
-- Notes persist with localStorage
-s
+- Notes working with localStorage
