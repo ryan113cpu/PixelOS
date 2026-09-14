@@ -31,7 +31,7 @@ body {
     overflow: hidden;
 }
 
-/* Desktop icons */
+/* icons */
 
 .desktop-icons {
     padding: 20px;
@@ -72,7 +72,7 @@ body {
     font-size: 13px;
 }
 
-/* Windows */
+/* windows */
 
 .window {
     position: absolute;
@@ -121,7 +121,7 @@ body {
     overflow-y: auto;
 }
 
-/* Buttons */
+/* buttons */
 
 button {
     background: var(--accent);
@@ -153,7 +153,7 @@ textarea {
     resize: vertical;
 }
 
-/* Welcome */
+/* welcome */
 
 .welcome-title {
     font-size: 28px;
@@ -171,7 +171,7 @@ textarea {
     margin-top: 0;
 }
 
-/* Files */
+/* files */
 
 .file-row {
     display: flex;
@@ -188,7 +188,7 @@ textarea {
     padding: 6px 10px;
 }
 
-/* Music */
+/* music */
 
 .song {
     background: rgba(255,255,255,0.07);
@@ -219,7 +219,7 @@ textarea {
     border-radius: 8px;
 }
 
-/* Calculator */
+/* calculator */
 
 .calculator {
     width: 280px;
@@ -243,7 +243,7 @@ textarea {
     font-size: 17px;
 }
 
-/* Theme Lab */
+/* theme */
 
 .color-row {
     display: flex;
@@ -258,7 +258,7 @@ textarea {
     padding: 2px;
 }
 
-/* Settings */
+/* settings */
 
 .setting-row {
     background: rgba(255,255,255,0.06);
@@ -271,7 +271,7 @@ textarea {
     margin-top: 0;
 }
 
-/* Taskbar */
+/* taskbar */
 
 #taskbar {
     position: absolute;
@@ -310,7 +310,7 @@ textarea {
     font-size: 14px;
 }
 
-/* Toast */
+/* toast */
 
 #toast {
     position: fixed;
@@ -324,7 +324,7 @@ textarea {
     z-index: 9999;
 }
 
-/* Toggle */
+/* toggles */
 
 .toggle {
     display: inline-block;
@@ -732,9 +732,7 @@ textarea {
 
 <script>
 
-/* -------------------------
-   Basic variables
-------------------------- */
+/* Basic variables */
 
 var desktop = document.getElementById("desktop");
 var zIndex = 10;
@@ -743,9 +741,7 @@ var notificationsOn = true;
 var soundOn = true;
 
 
-/* -------------------------
-   Toast
-------------------------- */
+/* toast */
 
 function showToast(message) {
 
@@ -764,9 +760,7 @@ function showToast(message) {
 }
 
 
-/* -------------------------
-   Open windows
-------------------------- */
+/* Open windows */
 
 function openWindow(id) {
 
@@ -783,9 +777,7 @@ function openWindow(id) {
 }
 
 
-/* -------------------------
-   Close windows
-------------------------- */
+/* Close windows */
 
 function closeWindow(windowElement) {
 
@@ -794,9 +786,7 @@ function closeWindow(windowElement) {
 }
 
 
-/* -------------------------
-   Desktop + taskbar buttons
-------------------------- */
+/* app buttons */
 
 var openButtons = document.querySelectorAll("[data-open]");
 
@@ -813,9 +803,7 @@ openButtons.forEach(function(button) {
 });
 
 
-/* -------------------------
-   Close buttons
-------------------------- */
+/* close buttons */
 
 var closeButtons = document.querySelectorAll(".close-button");
 
@@ -830,12 +818,6 @@ closeButtons.forEach(function(button) {
     });
 
 });
-
-
-/* -------------------------
-   Music Player
-------------------------- */
-
 var selectedSong = "";
 var currentAudio = null;
 
@@ -920,12 +902,6 @@ pauseMusic.addEventListener("click", function() {
     songStatus.textContent = "⏸ Paused: " + selectedSong;
 
 });
-
-
-/* -------------------------
-   Notes
-------------------------- */
-
 var notesText = document.getElementById("notesText");
 
 var savedNotes = localStorage.getItem("pixelos-notes");
@@ -957,9 +933,7 @@ document.getElementById("clearNotes").addEventListener("click", function() {
 });
 
 
-/* -------------------------
-   Files
-------------------------- */
+/* files */
 
 var files = [];
 
@@ -1071,9 +1045,7 @@ document.getElementById("newFile").addEventListener("click", function() {
 displayFiles();
 
 
-/* -------------------------
-   Calculator
-------------------------- */
+/* calculator */
 
 var calcDisplay = document.getElementById("calcDisplay");
 
@@ -1166,9 +1138,7 @@ document.addEventListener("keydown", function(event) {
 });
 
 
-/* -------------------------
-   Theme Lab
-------------------------- */
+/* theme */
 
 var accentPicker = document.getElementById("accentPicker");
 
@@ -1200,12 +1170,6 @@ if (savedAccent) {
     );
 
 }
-
-
-/* -------------------------
-   Wallpapers
-------------------------- */
-
 var wallpapers = {
 
     default: "linear-gradient(135deg, #111827, #312e81)",
@@ -1270,9 +1234,7 @@ if (savedWallpaper && wallpapers[savedWallpaper]) {
 }
 
 
-/* -------------------------
-   Random Theme
-------------------------- */
+/* random theme */
 
 document.getElementById("randomTheme").addEventListener("click", function() {
 
@@ -1322,9 +1284,7 @@ document.getElementById("randomTheme").addEventListener("click", function() {
 });
 
 
-/* -------------------------
-   Reset Theme
-------------------------- */
+/* reset theme */
 
 document.getElementById("resetTheme").addEventListener("click", function() {
 
@@ -1348,9 +1308,7 @@ document.getElementById("resetTheme").addEventListener("click", function() {
 });
 
 
-/* -------------------------
-   Notifications
-------------------------- */
+/* notifications */
 
 var notificationToggle =
     document.getElementById("notificationToggle");
@@ -1373,12 +1331,6 @@ notificationToggle.addEventListener("click", function() {
     }
 
 });
-
-
-/* -------------------------
-   Sound
-------------------------- */
-
 var soundToggle =
     document.getElementById("soundToggle");
 
@@ -1404,9 +1356,7 @@ soundToggle.addEventListener("click", function() {
 });
 
 
-/* -------------------------
-   Reset Settings
-------------------------- */
+/* reset */
 
 document.getElementById("resetSettings").addEventListener("click", function() {
 
@@ -1438,9 +1388,7 @@ document.getElementById("resetSettings").addEventListener("click", function() {
 });
 
 
-/* -------------------------
-   Draggable windows
-------------------------- */
+/* moving windows */
 
 var windows = document.querySelectorAll(".window");
 
@@ -1515,9 +1463,7 @@ windows.forEach(function(windowElement) {
 });
 
 
-/* -------------------------
-   Clock
-------------------------- */
+/* clock */
 
 function updateClock() {
 
@@ -1549,9 +1495,7 @@ updateClock();
 setInterval(updateClock, 1000);
 
 
-/* -------------------------
-   Startup
-------------------------- */
+/* start */
 
 showToast("Welcome to PixelOS 👋");
 
